@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Form</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">R'Dash Task Manager</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href="{% url 'addSprint' %}">Add Sprint</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div  style="background: linear-gradient(maroon, black);height:100vh">
+        {% for item in item_list %}
+      <div class="container text-center">
+        <div class="row align-items-start" style="background-color: white;margin-top: 1%;height: 10%;">
+          <div class="col">
+            {{item.sprintName}}
+          </div>
+          <div class="col">
+            {{item.sprintCreatedBy}}
+          </div>
+          <div class="col">
+            {{item.sprintDataPoints}}
+          </div>
+          <div class="col">
+            {{item.sprintDate}}
+          </div>
+          <div class="col" style="background-color: green;">
+            <a href="#">edit</a>
+          </div>
+          
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
