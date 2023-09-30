@@ -6,54 +6,57 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: black;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">R'Dash Task Manager</a>
+          <a class="navbar-brand" href="{% url 'userHomePage' %}">R'Dash Task Manager</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link" href="{% url 'addSprint' %}">Add Sprint</a>
+              <a class="nav-link" href="{% url 'addSprintTask' sprintName=sprintName%}">Add task + </a>
             </div>
           </div>
         </div>
       </nav>
-      <div  style="background: linear-gradient(maroon, black);height:100vh">
+      <div  style="background: linear-gradient(maroon, black);height:100vh;">
       <div class="container text-center">
-        <div class="row align-items-start" style="background-color: white;height: 10%;">
+        <div class="row align-items-start" style="background-color: grey;color: white;height: 5vh;">
             <div class="col">
-              Sprint Name
+              Task Name
             </div>
             <div class="col">
-              Sprint Created By
+              Task Description
             </div>
             <div class="col">
-              Sprint Data Points
+              Task Assignee
             </div>
             <div class="col">
-              Sprint Data Points
+              Task Points
             </div>
             <div class="col">
-                action event
+                Task Status
+              </div>
+              <div class="col">
+                Points limit - {{dataPoints}}
               </div>
           </div>
-          {% for item in item_list %}
-        <div class="row align-items-start" style="background-color: white;margin-top: 1%;height: 10%;">
-          <div class="col">
-            {{item.sprintName}}
+        {% for item in item_list %}
+        <div class="row align-items-start" style="background-color: white;margin-top: 1%;height: 10vh;">
+          <div class="col" >
+            {{item.taskName}}
           </div>
           <div class="col">
-            {{item.sprintCreatedBy}}
+            {{item.taskDescription}}
           </div>
           <div class="col">
-            {{item.sprintDataPoints}}
+            {{item.taskAssignee}}
           </div>
           <div class="col">
-            {{item.sprintDate}}
+            {{item.taskPoints}}
           </div>
-          <div class="col" style="background-color: green;">
-            <a href="{% url 'editItem' item.sprintName%}">edit</a>
+          <div class="col">
+            {{item.taskState}}
           </div>
         </div>
         {% endfor %}

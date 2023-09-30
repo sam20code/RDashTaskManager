@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Item Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar  navbar-dark bg-dark">
+        <a href="#" class="navbar-brand" style="margin-left: 3%;">RDash Task Manager</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          </div>
+       </nav>
+       
+    <div style="background: linear-gradient(red, black);height:100vh">
+        {% for item in item_list %}
+        <div style="margin-left:3% ;margin-bottom: 1%;">
+            <ul class="list-group list-group-horizontal">
+                <div style="width: 10%;height:6vh;background-color: whitesmoke;">
+                    <a style="color: black;" href="{% url 'taskBoard' item.sprintName %}">{{item.sprintName}}</a>
+                </div>
+                
+              </ul>
+        </div>
+            {% endfor %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

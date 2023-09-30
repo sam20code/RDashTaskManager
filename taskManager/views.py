@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render
-from .models import Sprint
-from taskManager.forms import SprintForm
+from .models import Sprint, Task
+from taskManager.forms import SprintForm, TaskForm
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -32,10 +32,7 @@ def userLogin(request):
         myuser = authenticate(username=username,password=password)
         if myuser is not None:
             login(request,myuser)
-            context ={
-              
-            }
-            return render(request,'taskManager/Credentials.html',context)
+            return userHomePage(request)
         
 #admin sign up and login  
 @csrf_exempt
@@ -75,3 +72,50 @@ def addSprint(request):
         return render(request,'taskManager/adminHomePage.html',context)
 
     return render(request,'taskManager/AddSprint.html',{'form':form})
+
+@csrf_exempt
+def editItem(request,sprintName):
+    item = Sprint.objects.get(pk = sprintName)
+    form  = SprintForm(request.POST or None,instance=item)
+    if form.is_valid():
+        form.save()
+        return redirect('taskManager/adminHomePage')
+    return render(request,'taskManager/AddSprint.html',{'form':form,'item':item})
+
+@csrf_exempt
+def taskBoard(request,sprintName):
+    item_list = Task.objects.filter(taskAssignee=request.user.username, sprintName = sprintName)
+    sprintItem = Sprint.objects.get(pk = sprintName)
+    context = {
+        "sprintName" : sprintName,
+        "dataPoints" : sprintItem.sprintDataPoints,
+        "item_list" : item_list
+    }
+    return render(request,'taskManager/TaskBoard.html',context)
+
+@csrf_exempt
+def addSprintTask(request,sprintName):
+    form  = TaskForm(request.POST,request.FILES)
+    if form.is_valid(): 
+        form.save()
+        context = {
+            "sprintName" : sprintName
+        }
+        item_list = Task.objects.filter(taskAssignee=request.user.username, sprintName = sprintName)
+        sprintItem = Sprint.objects.get(pk = sprintName)
+        context = {
+            "sprintName" : sprintName,
+            "dataPoints" : sprintItem.sprintDataPoints,
+            "item_list" : item_list
+        }
+        return render(request,'taskManager/TaskBoard.html',context)
+    
+    return render(request,'taskManager/addTask.html',{'form':form})
+
+@csrf_exempt
+def userHomePage(request):
+    item_list = Sprint.objects.all()
+    context ={
+        'item_list' : item_list,
+    }
+    return render(request,'taskManager/userHomePage.html',context)
