@@ -72,16 +72,17 @@ The user homepage presents a list of sprints they are associated with or have ac
 - A visual indicator displays the total data points allocated for the sprint, ensuring that users stay within set limits.
 ![UserTaskBoard](https://github.com/sam20code/RDashTaskManager/assets/56734174/edd5f6b0-d4ea-4fe0-b166-f076849ef07e)
 `7. HTML Templates and Styling:`
-The application utilizes HTML templates to render dynamic content, providing an intuitive and user-friendly interface.
-CSS styles, possibly with the assistance of Bootstrap, are applied to enhance the visual appeal and layout of the application.
+- The application utilizes HTML templates to render dynamic content, providing an intuitive and user-friendly interface.
+- CSS styles, possibly with the assistance of Bootstrap, are applied to enhance the visual appeal and layout of the application.
+
 `8. Forms and Models:`
+- Django forms facilitate user input, data validation, and interaction with the application.
+- Django models define the database structure, governing the storage and retrieval of sprint and task data.
 
-Django forms facilitate user input, data validation, and interaction with the application.
-Django models define the database structure, governing the storage and retrieval of sprint and task data.
 `9. URL Routing and Views:`
-
-URL patterns are clearly defined to map specific URLs to appropriate views.
-Views handle user interactions and database operations, ultimately rendering the correct HTML templates.
+- URL patterns are clearly defined to map specific URLs to appropriate views.
+- Views handle user interactions and database operations, ultimately rendering the correct HTML templates.
+  
 `10. Security Measures:`
 - Robust security measures are implemented, including Django's built-in CSRF protection and user authentication, to safeguard the application from vulnerabilities.
 
